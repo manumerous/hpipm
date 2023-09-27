@@ -45,8 +45,8 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 # Options
 
 # Target architecture
-set(TARGET AVX CACHE STRING "Set CPU architecture target")
-#set(TARGET GENERIC CACHE STRING "Set CPU architecture target")
+#set(TARGET AVX CACHE STRING "Set CPU architecture target")
+set(TARGET GENERIC CACHE STRING "Set CPU architecture target")
 
 # Populate a list of allowable targets and link it to the option
 set(ALLOWED_TARGETS
@@ -149,9 +149,9 @@ endif()
 # target-specific flags
 if(${TARGET} MATCHES AVX)
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DTARGET_AVX")
-	# if(CMAKE_C_COMPILER_ID STREQUAL "GNU" OR CMAKE_C_COMPILER_ID STREQUAL "Clang")
-	# 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m64 -mavx")
-	# endif()
+	if(CMAKE_C_COMPILER_ID STREQUAL "GNU" OR CMAKE_C_COMPILER_ID STREQUAL "Clang")
+		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m64 -mavx")
+	endif()
 elseif(${TARGET} MATCHES GENERIC)
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DTARGET_GENERIC")
 endif()
@@ -169,9 +169,9 @@ endif(${REF_BLAS} MATCHES BLIS)
 if(${REF_BLAS} MATCHES NETLIB)
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DREF_BLAS_NETLIB")
 endif(${REF_BLAS} MATCHES NETLIB)
-# if(${REF_BLAS} MATCHES MKL)
-# 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DREF_BLAS_MKL -m64 -I/opt/intel/mkl/include")
-# endif(${REF_BLAS} MATCHES MKL)
+if(${REF_BLAS} MATCHES MKL)
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DREF_BLAS_MKL -m64 -I/opt/intel/mkl/include")
+endif(${REF_BLAS} MATCHES MKL)
 if(${REF_BLAS} MATCHES ATLAS)
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DREF_BLAS_ATLAS")
 endif(${REF_BLAS} MATCHES ATLAS)
