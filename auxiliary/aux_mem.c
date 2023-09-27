@@ -33,14 +33,14 @@
 *                                                                                                 *
 **************************************************************************************************/
 
-#ifdef TARGET_AVX
-#include <mmintrin.h>
-#include <xmmintrin.h>  // SSE
-#include <emmintrin.h>  // SSE2
-#include <pmmintrin.h>  // SSE3
-#include <smmintrin.h>  // SSE4
-#include <immintrin.h>  // AVX
-#endif
+// #ifdef TARGET_AVX
+// #include <mmintrin.h>
+// #include <xmmintrin.h>  // SSE
+// #include <emmintrin.h>  // SSE2
+// #include <pmmintrin.h>  // SSE3
+// #include <smmintrin.h>  // SSE4
+// #include <immintrin.h>  // AVX
+// #endif
 
 #include "hpipm_common.h"
 
